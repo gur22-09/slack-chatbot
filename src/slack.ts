@@ -15,6 +15,7 @@ import {
   GENERAL_CAHNNEL_ID,
   SPICE_LEVELS_OPTIONS,
 } from "./constants";
+import { saveItem } from "./util/notion";
 
 async function handleSlashCommand(payload: SlackSlashCommandPayload) {
   switch (payload.command) {
@@ -101,6 +102,10 @@ async function handleInteractivity(payload: SlackModalPayload) {
         spiceLevel: data.spice_level_block.spice_level.selected_option.value,
         submitter: payload.user.name,
       };
+
+      await saveItem({
+        ...fields,
+      });
 
       await slackApi("chat.postMessage", {
         channel: GENERAL_CAHNNEL_ID,
