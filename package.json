@@ -1,4 +1,7 @@
-{
+{   
+	"scripts": {
+		"start:dev": "ntl dev --live"
+	},
 	"dependencies": {
 		"@netlify/functions": "^1.6.0"
 	},
