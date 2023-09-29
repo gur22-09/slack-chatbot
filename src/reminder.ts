@@ -27,6 +27,6 @@ const postNewItemsToSlack: Handler = async (event) => {
   }
 };
 
-// export const handler = schedule('0 9 * * 1',postNewItemsToSlack);
-export const handler = schedule('* * * * *',postNewItemsToSlack);
+export const handler = schedule('0 9 * * 1',postNewItemsToSlack);
+// export const handler = schedule('* * * * *',postNewItemsToSlack);
 
