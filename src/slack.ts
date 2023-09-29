@@ -12,41 +12,39 @@ import {
   FOOD_FIGHT_MODAL_ID,
   FOOD_FIGHT_MODAL_TITLE,
   FOOD_FIGHT_NUDGE_ID,
-  GENERAL_CAHNNEL_ID,
   SPICE_LEVELS_OPTIONS,
-} from "./constants";
+} from "./util/constants";
 import { saveItem } from "./util/notion";
 
 async function handleSlashCommand(payload: SlackSlashCommandPayload) {
   switch (payload.command) {
-    // case "/foodfight": {
-    //   const catUrl = await getRandomCatImageUrl();
-    //   const response = await slackApi("chat.postMessage", {
-    //     channel: payload.channel_id,
-    //     attachments: [
-    //       {
-    //         fallback: "Plain-text summary of the attachment.",
-    //         color: "#2eb886",
-    //         pretext: "Don't you just love cats",
-    //         fields: [
-    //           {
-    //             title: "Priority",
-    //             value: "High",
-    //             short: false,
-    //           },
-    //         ],
-    //         image_url: catUrl,
-    //         thumb_url: "https://cdn2.thecatapi.com/images/YXjvj-hjW.jpg",
-    //       },
-    //     ],
-    //     text: "Things are happening!",
-    //   });
+    case "/cats": {
+      const catUrl = await getRandomCatImageUrl();
+      const response = await slackApi("chat.postMessage", {
+        channel: payload.channel_id,
+        attachments: [
+          {
+            fallback: "Plain-text summary of the attachment.",
+            color: "#2eb886",
+            pretext: "Don't you just love cats",
+            fields: [
+              {
+                title: "Priority",
+                value: "High",
+                short: false,
+              },
+            ],
+            image_url: catUrl,
+            thumb_url: catUrl,
+          },
+        ],
+      });
 
-    //   if (!response.ok) {
-    //     console.log(response);
-    //   }
-    //   break;
-    // }
+      if (!response.ok) {
+        console.log(response);
+      }
+      break;
+    }
 
     case "/foodfight":
       const response = await slackApi(
@@ -56,7 +54,7 @@ async function handleSlashCommand(payload: SlackSlashCommandPayload) {
           title: "Start food fight",
           trigger_id: payload.trigger_id,
           blocks: [
-            blocks.sections({
+            blocks.section({
               text: FOOD_FIGHT_MODAL_TITLE,
             }),
             blocks.input({
@@ -108,7 +106,7 @@ async function handleInteractivity(payload: SlackModalPayload) {
       });
 
       await slackApi("chat.postMessage", {
-        channel: GENERAL_CAHNNEL_ID,
+        channel: process.env.GENERAL_CAHNNEL_ID,
         text: `Oh dang, y'all :eyes: <@${payload.user.id}> just started a food fight with a ${fields.spiceLevel} take :\n\n *${fields.opinion}*\n\n...discuss 😈`,
       });
       break;

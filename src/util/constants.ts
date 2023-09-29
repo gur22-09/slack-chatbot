@@ -10,5 +10,4 @@ export const SPICE_LEVELS_OPTIONS = [
   { label: "spicy", value: "spicy" },
   { label: "nuclear", value: "nuclear" },
 ];
-export const GENERAL_CAHNNEL_ID = 'C05SZNW9N0J';
 export const FOOD_FIGHT_NUDGE_ID = 'start-food-fight-nudge';

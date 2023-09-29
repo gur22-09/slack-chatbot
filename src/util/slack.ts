@@ -41,7 +41,7 @@ export async function getRandomCatImageUrl() {
 }
 
 export const blocks = {
-  sections: ({ text }: SectionBlockArgs): SlackBlockSection => {
+  section: ({ text }: SectionBlockArgs): SlackBlockSection => {
     return {
       type: "section",
       text: {
