@@ -1,4 +1,8 @@
-{
+{   
+	"scripts": {
+		"dev": "ntl dev --live",
+		"update:env": "ntl env:import .env"
+	},
 	"dependencies": {
 		"@netlify/functions": "^1.6.0"
 	},
